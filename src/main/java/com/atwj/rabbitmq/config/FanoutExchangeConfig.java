@@ -10,10 +10,10 @@ import org.springframework.context.annotation.Configuration;
 /**
  * @author wj
  * @create_time 2023/6/29
- * @description
+ * @description 扇形交换机 不需要指定routingKey
  */
 @Configuration
-public class RabbitConfig {
+public class FanoutExchangeConfig {
 
     /*
     1. 定义交换机

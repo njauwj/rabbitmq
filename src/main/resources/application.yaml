@@ -8,3 +8,5 @@ spring:
     username: njauwj
     password: 1724031211
     virtual-host: my_virtual_host
+test:
+  name: wj

@@ -8,7 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import javax.annotation.Resource;
 
 @SpringBootTest
-class RabbitmqApplicationTests {
+class FanoutExchangeTest {
 
     @Resource
     private RabbitTemplate rabbitTemplate;
