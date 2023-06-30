@@ -1,11 +1,11 @@
 package com.atwj.rabbitmq.config;
 
-import org.springframework.amqp.core.Binding;
-import org.springframework.amqp.core.BindingBuilder;
-import org.springframework.amqp.core.DirectExchange;
-import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.core.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author wj
@@ -33,6 +33,19 @@ public class DirectExchangeConfig {
     @Bean
     public Queue queueG() {
         return new Queue("queue.direct.g");
+    }
+
+    @Bean
+    public Queue queueH() {
+        Map<String, Object> arguments = new HashMap<>();
+        //设置整个队列的过期时间 durable 表示是否持久化队列，即服务器重启后队列依然存在
+        arguments.put("x-message-ttl", 20000);
+        return new Queue("queue.direct.h", true, false, false, arguments);
+    }
+
+    @Bean
+    public Binding bindingH(DirectExchange directExchange, Queue queueH) {
+        return BindingBuilder.bind(queueH).to(directExchange).with("routingH");
     }
 
     @Bean

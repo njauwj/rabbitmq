@@ -7,6 +7,9 @@ import org.springframework.amqp.core.Queue;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @author wj
  * @create_time 2023/6/29
@@ -36,6 +39,7 @@ public class FanoutExchangeConfig {
         return new Queue("queue.fanout.b");
     }
 
+
     @Bean
     public Binding bindingA(FanoutExchange fanoutExchange, Queue queueA) {
         //绑定交换机与队列
@@ -46,5 +50,6 @@ public class FanoutExchangeConfig {
     public Binding bindingB(FanoutExchange fanoutExchange, Queue queueB) {
         return BindingBuilder.bind(queueB).to(fanoutExchange);
     }
+
 
 }
