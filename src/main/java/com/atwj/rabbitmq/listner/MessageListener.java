@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Slf4j
 public class MessageListener {
-    @RabbitListener(queues = {"queue.fanout.a", "queue.fanout.b", "queue.direct.c", "queue.direct.d"})
+    @RabbitListener(queues = {"queue.fanout.a", "queue.fanout.b", "queue.direct.c", "queue.direct.d", "queue.topic.e", "queue.topic.f"})
     public void receiveMessage(Message message) {
         byte[] body = message.getBody();
         log.info("接收到的消息为{}", new String(body));
