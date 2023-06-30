@@ -31,6 +31,16 @@ public class DirectExchangeConfig {
     }
 
     @Bean
+    public Queue queueG() {
+        return new Queue("queue.direct.g");
+    }
+
+    @Bean
+    public Binding bindingG(DirectExchange directExchange, Queue queueG) {
+        return BindingBuilder.bind(queueG).to(directExchange).with("routingG");
+    }
+
+    @Bean
     public Binding bindingC1(DirectExchange directExchange, Queue queueC) {
         return BindingBuilder.bind(queueC).to(directExchange).with("routingA");
     }
