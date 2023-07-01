@@ -43,6 +43,25 @@ public class DirectExchangeConfig {
         return new Queue("queue.direct.h", true, false, false, arguments);
     }
 
+
+    @Bean
+    public Queue queueI() {
+        Map<String, Object> arguments = new HashMap<>();
+        //设置整个队列的过期时间 durable 表示是否持久化队列，即服务器重启后队列依然存在
+        arguments.put("x-message-ttl", 20000);
+        //绑定死信交换机
+        arguments.put("x-dead-letter-exchange", "exchange.dlx");
+        //指定RoutingKey 要与死信队列与死信交换机之间的相同
+        arguments.put("x-dead-letter-routing-key", "error");
+        return new Queue("queue.direct.i", true, false, false, arguments);
+    }
+
+    @Bean
+    public Binding bindingI(DirectExchange directExchange, Queue queueI) {
+        return BindingBuilder.bind(queueI).to(directExchange).with("routingI");
+    }
+
+
     @Bean
     public Binding bindingH(DirectExchange directExchange, Queue queueH) {
         return BindingBuilder.bind(queueH).to(directExchange).with("routingH");
