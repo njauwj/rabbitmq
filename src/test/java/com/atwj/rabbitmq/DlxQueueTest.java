@@ -23,7 +23,6 @@ public class DlxQueueTest {
     void testDlx() {
         Message message = MessageBuilder.withBody("hello world".getBytes()).build();
         rabbitTemplate.convertAndSend("exchange.direct", "routingI", message);
-
     }
 
 }
