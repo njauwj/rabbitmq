@@ -30,7 +30,7 @@ public class PublishConfirmTest {
             @Override
             public void confirm(CorrelationData correlationData, boolean ack, String cause) {
                 if (ack) {
-                    log.info("消息成功到达交换机{}", correlationData.getId());
+                    log.info("消息成功到达交换机");
                     return;
                 }
                 //未到达交换机可以采取一系列措施保证消息不会丢失
@@ -43,10 +43,7 @@ public class PublishConfirmTest {
     @Test
     void testConfirm() {
         Message message = MessageBuilder.withBody("hello world".getBytes()).build();
-        CorrelationData correlationData = new CorrelationData();//相关消息
-        //设置相关消息的唯一ID
-        correlationData.setId("12345");
-        rabbitTemplate.convertAndSend("exchange.direct", "routingA", message, correlationData);
+        rabbitTemplate.convertAndSend("exchange.direct", "routingB", message);
     }
 
 
