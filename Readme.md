@@ -51,5 +51,18 @@
  * 不同点：basicNack可以批量拒绝消息，basicReject只能拒绝当前消息
  */
 channel.basicNack(deliveryTag,false,false);
-channel.basicReject(deliveryTag,false);
+        channel.basicReject(deliveryTag,false);
 ```
+
+### 延迟队列
+
+1. 死信队列实现
+   > 注意点：同一队列的消息过期时间一定要一致<br/>
+   > 例如：有两条消息，一个过期时间为10 一个为5，为10的在前面，<br/>
+   > 由于队列是先进先出的，所以为5的消息就算过期了也还没有进入死信队列
+2. 开启延迟插件（需要官网下载）
+   > 使用延迟交换机不需要考虑消息过期时间的不一致问题 
+   ```bash
+   rabbitmq-plugins enable rabbitmq_delayed_message_exchange
+   ```
+   ![img_2.png](img_2.png)
