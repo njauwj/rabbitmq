@@ -61,8 +61,13 @@ channel.basicNack(deliveryTag,false,false);
    > 例如：有两条消息，一个过期时间为10 一个为5，为10的在前面，<br/>
    > 由于队列是先进先出的，所以为5的消息就算过期了也还没有进入死信队列
 2. 开启延迟插件（需要官网下载）
-   > 使用延迟交换机不需要考虑消息过期时间的不一致问题 
+   > 使用延迟交换机不需要考虑消息过期时间的不一致问题
    ```bash
    rabbitmq-plugins enable rabbitmq_delayed_message_exchange
    ```
    ![img_2.png](img_2.png)
+
+### 保证消息可靠性
+
+1. 保证消息到达交换机
+   > 开启发布者确认模式，发送一条消息后会受到通知消息是否发送成功

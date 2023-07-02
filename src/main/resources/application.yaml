@@ -11,5 +11,6 @@ spring:
     listener:
       simple:
         acknowledge-mode: manual #设置手动接受消息
+    publisher-confirm-type: correlated
 test:
   name: wj
